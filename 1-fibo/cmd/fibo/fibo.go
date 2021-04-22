@@ -3,15 +3,17 @@ package main
 import (
 	"fmt"
 	"github.com/phpclub/teachbase/1-fibo/pkg/fibolib"
-	"os"
 )
 
-func main() {
-	var res, errStr = fibolib.FibByNum(10)
-	if errStr != nil {
-		fmt.Println(errStr)
-		os.Exit(1)
-	}
-	fmt.Println(res)
+var testNumbers = []int{1, 2, 3, 4, 5, 6, 100}
 
+func main() {
+	for _, v := range testNumbers {
+		res, errStr := fibolib.FibByNum(v)
+		if errStr != nil {
+			fmt.Printf("%d => %s\n", v, errStr)
+		} else {
+			fmt.Printf("%d => %d\n", v, res)
+		}
+	}
 }
