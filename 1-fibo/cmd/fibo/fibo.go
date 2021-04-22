@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/phpclub/teachbase/1-fibo/pkg/fibolib"
 	"os"
 )
 
-const maxNum = 20
-
 func main() {
-	var res, errStr = FibByNum(10)
+	var res, errStr = fibolib.FibByNum(10)
 	if errStr != nil {
 		fmt.Println(errStr)
 		os.Exit(1)
