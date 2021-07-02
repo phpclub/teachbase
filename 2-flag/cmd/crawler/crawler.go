@@ -20,6 +20,9 @@ func init() {
 
 func main() {
 	flag.Parse()
+	if s == "" {
+		return
+	}
 	var scanner = spider.New()
 	for _, site := range sites {
 		res, err := scanner.Scan(site, 2)
@@ -30,21 +33,19 @@ func main() {
 		store = append(store, res...)
 	}
 	// искать по s если она указана
-	if len(s) > 0 {
-		fmt.Println("Найдено:")
-		for _, link := range _find(strings.ToLower(s)) {
-			fmt.Println(link.URL, link.Title)
-		}
+	fmt.Println("Найдено:")
+	for _, link := range find(strings.ToLower(s)) {
+		fmt.Println(link.URL, link.Title)
 	}
 }
 
 // _find возвращает слайс найденных документов
-func _find(value string) []crawler.Document {
-	var found []crawler.Document
+func find(value string) []crawler.Document {
+	var foundDocs []crawler.Document
 	for _, v := range store {
 		if strings.Contains(strings.ToLower(v.Title), value) {
-			found = append(found, v)
+			foundDocs = append(foundDocs, v)
 		}
 	}
-	return found
+	return foundDocs
 }
